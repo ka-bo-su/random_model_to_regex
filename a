@@ -1,0 +1,5 @@
+digraph {
+	I0 [label=I0 shape=point]
+	accept [label=accept shape=doublecircle]
+	I0 -> accept [label="((l2\!m3)|(l3\?m1))((l2\!m3)|(l3\?m1))*(((l2\!m3)|(l3\?m1))((l2\!m3)|(l3\?m1))*(l2\!m3)|(l2\!m3))*(((l2\!m3)|(l3\?m1))((l2\!m3)|(l3\?m1))*(l2\!m3)|(l2\!m3))"]
+}

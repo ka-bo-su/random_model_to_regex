@@ -1,0 +1,7 @@
+output/*
+*.png
+*.dot
+*.svg
+*.txt
+*test*
+__pycache__/*

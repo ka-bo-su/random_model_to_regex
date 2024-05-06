@@ -1,0 +1,9 @@
+strict(
+	loopS(
+		l1 -- m1 -> l2
+	),
+	alt(
+		l1 -- m2 -> l2,
+		l1 -- m2 -> l3
+	)
+)

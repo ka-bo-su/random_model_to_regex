@@ -16,36 +16,38 @@ sys.setrecursionlimit(10000)
 
 config = {
         "node_type":{
-            "action":5,
-            "bin_operation":5,
+            "action":3,
+            "bin_operation":6,
             "un_operation":2
         },
         "bin_operation":{
-            "seq":2,
-            "strict":2,
-            "par":1,
-            "alt":1
+            "seq":10,
+            "strict":1,
+            "par":2,
+            "alt":2
         },
         "un_operation":{
-            "loopS":1
+            "loopS":2
         },
         "life_line":{
-            "l1":1,
-            "l2":1,
-            "l3":1
+            "l1":100,
+            "l2":100,
+            "l3":100,
+            "l4":1,
+            "l5":1,
         },
         "message":{
-            "m1":1,
-            "m2":1,
-            "m3":1
+            "m1":100,
+            "m2":100,
+            "m3":100,
+            "m4":1,
+            "m5":1,
         }
     }
 
 BIN_OPERATION = ["seq", "strict", "par", "alt"]
 UN_OPERATION = ["loopS"]
 
-life_line = ["l1","l2","l3"]
-message = ["m1","m2","m3"]
 depth = 7
 
 class node :
@@ -95,14 +97,14 @@ class node :
         node_type = select.node_type(self)
         if node_type == "action" or max_depth == self.depth:
             node_type = "action"
-            node_info_lifeline = select.life_line(self)
+            node_info_lifeline_from = select.life_line(self)
+            while True:
+                node_info_lifeline_to = select.life_line(self)
+                if node_info_lifeline_from != node_info_lifeline_to:
+                    break
             node_info_message = select.message(self)
-            if (random.randint(0, 1) == 0):
-                node_info = node_info_lifeline + " -- " + node_info_message + " -> |"
-                self.add_node(node_type, node_info)
-            else:
-                node_info = node_info_message + " -> " + node_info_lifeline
-                self.add_node(node_type, node_info)
+            node_info = node_info_lifeline_from + " -- " + node_info_message + " ->" + node_info_lifeline_to
+            self.add_node(node_type, node_info)
         elif node_type == "bin_operation":
             node_info = select.bin_operation(self)
             self.add_node(node_type, node_info)
@@ -162,30 +164,32 @@ class select:
             return "loopS"
         
     def life_line(self):
-        tmp_l1 = config["life_line"]["l1"]
-        tmp_l2 = config["life_line"]["l2"]
-        tmp_l3 = config["life_line"]["l3"]
-        tmp = tmp_l1 + tmp_l2 + tmp_l3
-        random_number = random.randint(1,tmp)
-        if random_number <= tmp_l1:
-            return "l1"
-        elif random_number <= tmp_l1 + tmp_l2:
-            return "l2"
-        else:
-            return "l3"
+        tmp_arr = []
+        key_arr = list(config["life_line"].keys())
+        sum = 0
+        for key in key_arr:
+            tmp_arr.append(config["life_line"][key])
+            sum += config["life_line"][key]
+        random_number = random.randint(1,sum)
+        tmp_sum = 0
+        for key in key_arr:
+            tmp_sum += config["life_line"][key]
+            if random_number <= tmp_sum:
+                return key
         
     def message(self):
-        tmp_m1 = config["message"]["m1"]
-        tmp_m2 = config["message"]["m2"]
-        tmp_m3 = config["message"]["m3"]
-        tmp = tmp_m1 + tmp_m2 + tmp_m3
-        random_number = random.randint(1,tmp)
-        if random_number <= tmp_m1:
-            return "m1"
-        elif random_number <= tmp_m1 + tmp_m2:
-            return "m2"
-        else:
-            return "m3"
+        tmp_arr = []
+        key_arr = list(config["message"].keys())
+        sum = 0
+        for key in key_arr:
+            tmp_arr.append(config["message"][key])
+            sum += config["message"][key]
+        random_number = random.randint(1,sum)
+        tmp_sum = 0
+        for key in key_arr:
+            tmp_sum += config["message"][key]
+            if random_number <= tmp_sum:
+                return key
 
 def gen_random_hif(file_name = "hibou_para.hif"):
     nodeA = node()

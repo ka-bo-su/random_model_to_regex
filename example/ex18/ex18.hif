@@ -1,0 +1,8 @@
+seq(
+	loopS(
+			l1 -- m1 -> l2
+	),
+	loopS(
+			l1 -- m2 -> l2
+	)
+)

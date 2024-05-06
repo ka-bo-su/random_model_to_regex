@@ -1,0 +1,23 @@
+seq(
+	loopS(
+		seq(
+		l2 -- m1 -> l1
+		,
+		alt(
+			l2 -- m2 -> l1
+			,
+			o
+		)
+		)
+	)
+	,
+	loopS(
+		seq(
+			l1 -- m4 -> l2
+			,
+			l2 -- m5 -> l1
+		)
+	)
+)
+	
+

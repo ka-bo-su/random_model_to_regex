@@ -130,7 +130,7 @@ def main():
             state_num_file = f"./state_num.txt"
             with open(state_num_file, "a") as f:
                 f.write(f"{i+1} : {state_num}\n")
-            if state_num >= 5 and state_num <= 20:
+            if  state_num <= 20:
                 nft_gp = graph()
                 nft_gp.add_content_from_dot_file(dot_file)
                 nft_gp.draw_graph(f"test")

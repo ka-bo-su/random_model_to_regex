@@ -18,15 +18,15 @@ M_ENV = []
 M_BROADCAST = []
 M_PAIR = []
 M_ALL = []
-MAX_DEPTH = 4
+MAX_DEPTH = 2
 
 class conf:
     def __init__(self) -> None:        
         self.config_replace_holl = {
             "seq": 1,
             "strict": 0,
-            "par": 0,
-            "alt": 0,
+            "par": 1,
+            "alt": 1,
             "loopS": 1,
             "hole": 1,
             "sum": 0
